@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+		var map;
+		var elevator;
+		var myOptions = {
+			zoom: 11,
+			center: new google.maps.LatLng(-33.851563, 151.138585)
+			//,			mapTypeId: 'terrain'
+		};
+		map = new google.maps.Map($('#map')[0], myOptions);
+
+		//var addresses = ['beecroft public school','Balmain Public School','annandale north public school','Cammeray Public School','Carlingford West Public School','chatswood public school','Denistone East Public School','Drummoyne Public School','Eastwood Public School'
+		//,'Epping Height Publich School','Epping North Publich School','Epping West Publich School','Epping Publich School',
+		//'Erskineville Public School'];
+
+		var addresses = [" Al Noori Muslim Primary School Greenacre"," All Hallows Primary School Five Dock"," Annandale North Public School Annandale"," Arcadia Vale Public School Arcadia Vale"," Ascham School Ltd Edgecliff"," Australia Street Infants School Newtown"," Balmain Public School Balmain"," Beecroft Public School Beecroft"," Bronte Public School Bronte"," Bunnaloo Public School Bunnaloo"," Cammeray Public School Cammeray"," Carlingford West Public School Carlingford"," Castle Cove Public School Castle Cove"," Chatswood Public School Chatswood"," Christadelphian Heritage College Cooranbong"," Claremont College Randwick"," Coogee Boys' Preparatory School Randwick"," Crossmaglen Public School Crossmaglen"," Currambena School Lane Cove"," Dalgety Public School Dalgety"," Denistone East Public School Eastwood"," Drummoyne Public School Drummoyne"," Eastwood Public School Eastwood"," Epping Heights Public School Epping"," Epping North Public School North Epping"," Epping Public School Epping"," Epping West Public School Epping"," Errowanbang Public School Carcoar"," Erskineville Public School Erskineville"," Excelsior Public School Castle Hill"," Forestville Montessori School Forestville"," Fr John Therry Catholic Primary School Balmain"," Gladesville Public School Gladesville"," Gladstone Public School Gladstone"," Glenaeon Rudolf Steiner School Limited Middle Cove",""," Gordon West Public School Pymble"," Highfields Preparatory & Kindergarten School Limited Lindfield"," Holy Cross Junior School Bondi Junction"," Holy Family Catholic Primar Catholic Primary School Lindfield","",""," Hornsby North Public School Hornsby"," Hunters Hill Public School Hunters Hill"," Hurstville Public School Hurstville"," John Colet School Belrose"," John Purchase Public School Cherrybrook"," Kamaroi Rudolf Steiner School Belrose"," Kambala Rose Bay"," Kareela Public School Kareela"," Killara Public School Killara"," Kincoppal-Rose Bay School of the Sacred Heart Rose Bay"," Kinma School Terrey Hills"," Knox Grammar School Wahroonga"," Lane Cove Public School Lane Cove"," Leichhardt Public School Leichhardt"," Lindfield East Public School East Lindfield"," Lord Howe Island Central School Lord Howe Island"," Loreto Kirribilli Kirribilli"," Macquarie College Wallsend"," Malek Fahd Islamic School Greenacre"," Manly Vale Public School Manly Vale"," Manly West Public School Balgowlah"," Masada College Lindfield"," Matthew Pearce Public School Baulkham Hills"," McAuley Primary School Rose Bay"," Meriden School Strathfield"," Middle Dural Public School Middle Dural"," Middle Harbour Public School Mosman"," MLC School Burwood"," Montessori East Bondi"," Montessori Excelsior School Pymble"," Mosman Church of England Preparatory School Mosman"," Mount Keira Public School Mount Keira"," Mount Sinai College Maroubra"," Murray Farm Public School Carlingford"," Neutral Bay Public School Neutral Bay"," New Lambton Heights Infants School New Lambton Heights"," New Lambton Public School New Lambton"," Newington Public School Newington"," Newrybar Public School Newrybar"," North Rocks Public School North Rocks"," Northbridge Public School Northbridge"," Northholm Grammar School Arcadia"," Nowra Hill Public School Nowra"," Our Lady Help of Christians Catholic Primary School Epping"," Our Lady of the Rosary School Kensington"," Our Lady of the Sacred Heart School Randwick"," Pennant Hills Public School Pennant Hills"," Pittwater House Girls College Collaroy"," Presbyterian yterian Ladies Colle Ladies College Croydon"," Pymble Ladies' College Pymble"," Pymble Public School Pymble"," Queenwood School for Girls Ltd Mosman"," Raleigh Public School Raleigh"," Ravenswood School for Girls Gordon"," Roseville College Roseville"," Russell Lea Infants School Five Dock"," Sacred Heart School Mosman"," SCEGGS, Darlinghurst Darlinghurst"," St Agatha's Catholic Primary School Pennant Hills"," St Aloysius' College Milsons Point"," St Ambrose' Primary School Concord West"," St Augustine's College Brookvale"," St Cecilia's Catholic Primary School Balgowlah"," St Charles' School Waverley"," St Francis' School Paddington"," St Gerard's Catholic Primary School Carlingford"," St Ignatius' College Lane Cove"," St Ives North Public School St Ives"," St Joseph's Primary School Woodburn"," St Luke's Grammar School Dee Why"," St Margaret Mary's School Randwick North"," St Martin's Catholic Primary School Davidson"," St Mary's Preparatory School North Sydney"," St Mary's School Erskineville"," St Michael's Catholic Primary School Thirroul"," St Oliver's Primary School Harris Park"," St Patrick's Catholic Primary School Asquith"," St Philip Neri Catholic Primary School Northbridge"," St Pius X College Chatswood"," St Raphael's Primary School South Hurstville"," Summer Hill Public School Summer Hill"," Sydney Church of England Grammar School North Sydney"," Sydney Distance Education Primary School Stanmore"," Sydney Grammar School, Edgecliff Preparatory School Paddington"," Sydney Grammar School, St Ives Preparatory School St Ives"," Sydney Japanese School Terrey Hills"," Tangara School for Girls Cherrybrook"," Tanja Public School Tanja"," Tara Anglican School for Girls North Parramatta"," Taverners Hill Infants School Petersham"," The King's School North Parramatta"," The Scots School Albury Albury"," Tregeagle Public School Tregeagle"," Villa Maria Primary School Hunters Hill"," y School Wahroon School Wahroonga"," Wahroonga Public School Wahroonga"," Waitara Public School Wahroonga"," Wenona School Ltd North Sydney"," Wilsons Creek Public School Mullumbimby"," Wollombi Public School Wollombi"," Woollahra Public School Woollahra"," Yanginanook School Belrose"," Abbotsleigh Wahroonga"]
+		for (var x = 0; x < addresses.length; x++) {
+			$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address='+addresses[x]+'&sensor=false', null, function (data) {
+				var p = data.results[0].geometry.location
+				console.log(data);
+				//alert(data);
+				//var latlng = new google.maps.LatLng(p.lat, p.lng);
+				var marker = new google.maps.Marker({
+					position: p,//latlng,
+					map: map
+				});
+				
+				marker.addListener('click', function() {
+					infowindow = new google.maps.InfoWindow();
+				 infowindow.setContent(data.results[0].formatted_address); 
+				 infowindow.open(map,marker);
+				});
+				google.maps.event.addListener(marker, 'click', function() {
+   });
+				
+
+			});
+
+		}
+		}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPQGu2T0s7k_i3ujpvCbkW_X3UfGSLJVk&callback=initMap">
+    </script>
+  </body>
+</html>
